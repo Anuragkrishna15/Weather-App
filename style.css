@@ -1,0 +1,311 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(45deg, #0a0a3f, #1a1a5f, #2a2a7f);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.container {
+    width: 90%;
+    max-width: 470px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    padding: 30px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transform: translateY(20px);
+    opacity: 0;
+    animation: slideUp 0.5s ease forwards;
+}
+
+@keyframes slideUp {
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 15px 20px;
+    border: none;
+    outline: none;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 30px;
+    color: #fff;
+    font-size: 1rem;
+    margin-right: 10px;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+}
+
+.search-box input:focus {
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.2);
+}
+
+.search-box input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.search-btn {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(145deg, #5d9cec, #4a89dc);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.3s ease;
+    box-shadow: 0 4px 15px rgba(74, 137, 220, 0.3);
+}
+
+.search-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(74, 137, 220, 0.4);
+}
+
+.search-btn i {
+    color: #fff;
+    font-size: 1.2rem;
+}
+
+.weather-info {
+    text-align: center;
+    color: #fff;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.location {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeIn 0.5s ease forwards 0.3s;
+}
+
+.temperature {
+    font-size: 4.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeIn 0.5s ease forwards 0.5s;
+}
+
+.unit {
+    font-size: 2rem;
+    opacity: 0.8;
+}
+
+.weather-condition {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    opacity: 0;
+    animation: fadeIn 0.5s ease forwards 0.7s;
+}
+
+.weather-condition img {
+    width: 100px;
+    filter: drop-shadow(0 0 8px rgba(255,255,255,0.3));
+    transform: scale(1);
+    transition: transform 0.3s ease;
+}
+
+.weather-condition img:hover {
+    transform: scale(1.1);
+}
+
+.details {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    margin-top: 30px;
+    opacity: 0;
+    animation: fadeIn 0.5s ease forwards 0.9s;
+}
+
+.humidity, .wind {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+.humidity:hover, .wind:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-3px);
+}
+
+.details i {
+    font-size: 2rem;
+    margin-right: 10px;
+    opacity: 0.8;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Add glowing effect */
+.container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 30px;
+    background: linear-gradient(45deg, #5d9cec33, transparent);
+    filter: blur(20px);
+    z-index: -1;
+}
+
+@media (max-width: 400px) {
+    .container {
+        padding: 20px;
+    }
+    
+    .temperature {
+        font-size: 3.5rem;
+    }
+    
+    .details {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .humidity, .wind {
+        justify-content: center;
+    }
+} 
+
+/* Weather Background Animations */
+.weather-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Rain Animation */
+.rain-drop {
+    position: absolute;
+    width: 2px;
+    height: 100px;
+    background: linear-gradient(transparent, rgba(255, 255, 255, 0.7));
+    animation: rain linear infinite;
+}
+
+@keyframes rain {
+    0% {
+        transform: translateY(-100px);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh);
+        opacity: 0.3;
+    }
+}
+
+/* Snow Animation */
+.snow-flake {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: white;
+    border-radius: 50%;
+    animation: snow linear infinite;
+}
+
+@keyframes snow {
+    0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0.3;
+    }
+}
+
+/* Sunny Animation */
+.sun {
+    position: absolute;
+    top: 50px;
+    right: 100px;
+    width: 100px;
+    height: 100px;
+    background: #ffd700;
+    border-radius: 50%;
+    box-shadow: 0 0 50px #ff6b6b, 0 0 100px #ffd700;
+    animation: glow 3s infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        box-shadow: 0 0 50px #ff6b6b, 0 0 100px #ffd700;
+    }
+    to {
+        box-shadow: 0 0 70px #ff6b6b, 0 0 120px #ffd700;
+    }
+}
+
+/* Cloudy Animation */
+.cloud {
+    position: absolute;
+    width: 100px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 20px;
+    animation: float 8s infinite ease-in-out;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(20px);
+    }
+} 
